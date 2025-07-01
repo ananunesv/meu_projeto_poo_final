@@ -1,6 +1,6 @@
 import asyncio
-import websocket_service
-import json  # ← ADICIONAR ESTA LINHA
+import websockets  # ← CORRIGIR: era "websocket_service"
+import json
 from datetime import datetime 
 
 class WebSocketService:
@@ -8,7 +8,7 @@ class WebSocketService:
     
     def __init__(self):
         self.connected_clients = set()
-        self.client_sessions = {}  # {websocket: {'username': str, 'connected_at': datetime}}
+        self.client_sessions = {}   # {websocket: {'username': str, 'connected_at': datetime}}
     
     async def register_client(self, websocket, username=None):
         """Registra um novo cliente WebSocket"""

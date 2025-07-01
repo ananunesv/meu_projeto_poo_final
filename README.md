@@ -37,11 +37,11 @@ zen_mind/
 pip install -r requirements.txt
 python route.py
 
-## Método 2: Docker
+### Método 2: Docker
 bashdocker build -t zen-mind .
 docker run -p 8080:8080 -v $(pwd):/app zen-mind
 
-## 🌐 Rotas Disponíveis
+🌐 Rotas Disponíveis
 
 / - Home page
 /login - Autenticação
