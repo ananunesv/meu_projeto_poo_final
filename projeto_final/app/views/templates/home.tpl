@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zen Mind - Meditação Guiada para o Dia a Dia</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/pagina.css">
-    <script src="/static/js/pagina.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/base.css">
+    <script src="/static/js/main.js"></script>
 </head>
 <body>
     <!-- Navigation -->
