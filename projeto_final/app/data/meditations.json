@@ -1,0 +1,20 @@
+[
+    {
+        "id": "med_001",
+        "title": "Respiração Matinal",
+        "duration": 10,
+        "category": "respiracao",
+        "description": "Técnica de respiração para começar o dia com energia",
+        "username": "admin",
+        "created_at": "2025-01-01T12:00:00"
+    },
+    {
+        "id": "med_002", 
+        "title": "Meditação para Dormir",
+        "duration": 20,
+        "category": "sono",
+        "description": "Relaxamento profundo para uma noite tranquila",
+        "username": "ana_medita",
+        "created_at": "2025-01-02T20:00:00"
+    }
+]
