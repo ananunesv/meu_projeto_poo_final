@@ -1,0 +1,32 @@
+[
+  {
+    "id": "post_001",
+    "username": "admin",
+    "content": "Bem-vindos ao fórum do Zen Mind! Compartilhem suas experiências de meditação.",
+    "timestamp": "2025-01-01T12:00:00"
+  },
+  {
+    "id": "post_002",
+    "username": "ana_medita",
+    "content": "Acabei de completar minha primeira semana de meditação diária. Que transformação!",
+    "timestamp": "2025-01-02T21:00:00"
+  },
+  {
+    "id": "94d90f9c-6034-4e87-a8ad-8e5fbcf984e3",
+    "username": "admin",
+    "content": "teste",
+    "timestamp": "2025-07-01T20:35:03.804930"
+  },
+  {
+    "id": "4759580c-1365-42bf-81b3-aefbb2c7fd94",
+    "username": "bolinhadegolf",
+    "content": "eu amo Jesus!",
+    "timestamp": "2025-07-01T20:46:46.106222"
+  },
+  {
+    "id": "d58f6710-c6ea-4f3e-96db-639f12e8fde4",
+    "username": "aninhalala",
+    "content": "sou nova aqui!",
+    "timestamp": "2025-07-01T21:07:01.985318"
+  }
+]

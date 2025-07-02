@@ -1,0 +1,38 @@
+[
+  {
+    "id": "med_002",
+    "title": "Meditação para Dormir",
+    "duration": 20,
+    "category": "sono",
+    "description": "Relaxamento profundo para uma noite tranquila",
+    "username": "ana_medita",
+    "created_at": "2025-01-02T20:00:00"
+  },
+  {
+    "id": "87a98724-2dcd-4987-868d-604eef7fea94",
+    "title": "asdasdasdasdasdasdasdasdasdasdasdasd",
+    "duration": 10,
+    "category": "concentracao",
+    "description": "asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdas",
+    "username": "bolinhadegolf",
+    "created_at": "2025-07-01T20:47:20.575227"
+  },
+  {
+    "id": "e4a78d86-29a9-4e33-ac97-391da7e46e61",
+    "title": "LEVANTADO DE COSTAS",
+    "duration": 10,
+    "category": "relaxamento",
+    "description": "LEVANTADO DE COSTAS",
+    "username": "bolinhadegolf",
+    "created_at": "2025-07-01T20:49:37.621337"
+  },
+  {
+    "id": "588edc8b-2589-4084-b8c3-40494bcdb516",
+    "title": "lalallalalalalal",
+    "duration": 10,
+    "category": "estresse",
+    "description": "asjdbksjfsdfsd",
+    "username": "admin",
+    "created_at": "2025-07-01T21:05:09.615654"
+  }
+]

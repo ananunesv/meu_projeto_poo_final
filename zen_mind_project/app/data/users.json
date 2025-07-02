@@ -1,0 +1,26 @@
+[
+  {
+    "username": "admin",
+    "email": "admin@zenMind.com",
+    "password": "admin123",
+    "created_at": "2025-01-01T12:00:00"
+  },
+  {
+    "username": "ana_medita",
+    "email": "ana@email.com",
+    "password": "123456",
+    "created_at": "2025-01-02T08:30:00"
+  },
+  {
+    "username": "bolinhadegolf",
+    "email": "bolinhadegolf@gmail.com",
+    "password": "bolinhadegolf123",
+    "created_at": "2025-07-01T18:14:15.030092"
+  },
+  {
+    "username": "aninhalala",
+    "email": "ana@123.com",
+    "password": "123123",
+    "created_at": "2025-07-01T21:06:47.836554"
+  }
+]
