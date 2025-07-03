@@ -12,12 +12,6 @@
     "timestamp": "2025-01-02T21:00:00"
   },
   {
-    "id": "94d90f9c-6034-4e87-a8ad-8e5fbcf984e3",
-    "username": "admin",
-    "content": "teste",
-    "timestamp": "2025-07-01T20:35:03.804930"
-  },
-  {
     "id": "4759580c-1365-42bf-81b3-aefbb2c7fd94",
     "username": "bolinhadegolf",
     "content": "eu amo Jesus!",
@@ -28,5 +22,11 @@
     "username": "aninhalala",
     "content": "sou nova aqui!",
     "timestamp": "2025-07-01T21:07:01.985318"
+  },
+  {
+    "id": "77fb0235-2a34-428c-9072-649d80216343",
+    "username": "admin",
+    "content": "Estou amando conhecer a MeditaÃ§Ã£o nesse lugar!",
+    "timestamp": "2025-07-03T09:59:18.796678"
   }
 ]

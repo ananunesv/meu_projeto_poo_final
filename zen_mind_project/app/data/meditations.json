@@ -34,5 +34,32 @@
     "description": "asjdbksjfsdfsd",
     "username": "admin",
     "created_at": "2025-07-01T21:05:09.615654"
+  },
+  {
+    "id": "53882f02-859e-49c8-b8dd-0aeb84e0b453",
+    "title": "MeditaÃ§Ã£o matinal",
+    "duration": 10,
+    "category": "respiracao",
+    "description": "cabei de acordar caramba",
+    "username": "ananunesv",
+    "created_at": "2025-07-02T16:59:58.304812"
+  },
+  {
+    "id": "12e526de-4c28-412c-8c97-2e53fd11fb80",
+    "title": "MeditaÃ§Ã£o para nÃ£o surtar com 7 matÃ©rias socorro vou ter um burnout",
+    "duration": 10,
+    "category": "respiracao",
+    "description": "nÃ£o tanko mais a unb alguÃ©m me leva para o capsi eu imploro",
+    "username": "admin",
+    "created_at": "2025-07-03T09:57:36.138794"
+  },
+  {
+    "id": "b634f9b8-0590-477e-afa8-d8c42b3f0645",
+    "title": "concentracao",
+    "duration": 10,
+    "category": "respiracao",
+    "description": "manha meditacao",
+    "username": "admin",
+    "created_at": "2025-07-03T11:23:09.859865"
   }
 ]
