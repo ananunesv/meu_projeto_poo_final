@@ -1,372 +1,237 @@
-// Zen Mind - JavaScript Principal
-// Funcionalidades elegantes e práticas para o app de meditação
+// Zen Mind - Homepage JavaScript
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🧘 Zen Mind inicializando...');
+    console.log('🧘 Zen Mind Homepage carregada');
     
-    // ===== NAVEGAÇÃO SUAVE =====
-    const initSmoothScroll = () => {
-        // Todos os links internos
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    // Calcula posição considerando altura do nav
-                    const navHeight = document.querySelector('nav').offsetHeight;
-                    const targetPosition = targetElement.offsetTop - navHeight - 20;
-                    
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                    
-                    console.log(`📍 Navegando para ${targetId}`);
-                }
-            });
-        });
-    };
-    
-    // ===== EFEITO SCROLL NA NAVBAR =====
-    const initNavScroll = () => {
-        const nav = document.querySelector('nav');
-        
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
-    };
-    
-    // ===== MENU MOBILE =====
-    const initMobileMenu = () => {
-        const menuBtn = document.querySelector('.mobile-menu-btn');
-        const navLinks = document.querySelector('.nav-links');
-        
-        // Cria menu mobile se não existir
-        let mobileMenu = document.querySelector('.mobile-menu');
-        if (!mobileMenu) {
-            mobileMenu = document.createElement('div');
-            mobileMenu.className = 'mobile-menu';
-            mobileMenu.innerHTML = `
-                <ul class="mobile-links">
-                    ${navLinks.innerHTML}
-                </ul>
-            `;
-            document.body.appendChild(mobileMenu);
-        }
-        
-        // Toggle menu
-        menuBtn.addEventListener('click', () => {
-            menuBtn.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
-            
-            // Anima botão hambúrguer
-            const spans = menuBtn.querySelectorAll('span');
-            if (menuBtn.classList.contains('active')) {
-                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-                spans[1].style.opacity = '0';
-                spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
-            } else {
-                spans[0].style.transform = '';
-                spans[1].style.opacity = '';
-                spans[2].style.transform = '';
-            }
-        });
-        
-        // Fecha menu ao clicar em link
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                menuBtn.classList.remove('active');
-                mobileMenu.classList.remove('active');
-            });
-        });
-    };
-    
-    // ===== ANIMAÇÃO DO CÍRCULO DE RESPIRAÇÃO =====
-    const initBreathingAnimation = () => {
-        const breathingText = document.querySelector('.breathing-text');
-        if (!breathingText) return;
-        
-        const texts = ['Inspire...', 'Segure...', 'Expire...', 'Pause...'];
-        let index = 0;
-        
-        setInterval(() => {
-            breathingText.style.opacity = '0';
-            setTimeout(() => {
-                breathingText.textContent = texts[index];
-                breathingText.style.opacity = '1';
-                index = (index + 1) % texts.length;
-            }, 300);
-        }, 4000 / texts.length);
-    };
-    
-    // ===== ANIMAÇÕES AO SCROLL =====
-    const initScrollAnimations = () => {
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+    // ===== ANIMAÇÃO DOS NÚMEROS =====
+    const animateNumbers = () => {
+        const numbers = document.querySelectorAll('.stat-number');
         
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                    const element = entry.target;
+                    const target = parseInt(element.getAttribute('data-target'));
+                    let current = 0;
+                    const increment = target / 100;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            current = target;
+                            clearInterval(timer);
+                        }
+                        element.textContent = Math.floor(current).toLocaleString('pt-BR');
+                    }, 20);
+                    observer.unobserve(element);
+                }
+            });
+        });
+        
+        numbers.forEach(number => observer.observe(number));
+    };
+    
+    // ===== ANIMAÇÃO DE ENTRADA =====
+    const animateOnScroll = () => {
+        const elements = document.querySelectorAll('.feature-card, .step-card, .testimonial-card');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '0';
+                        entry.target.style.transform = 'translateY(20px)';
+                        entry.target.style.transition = 'all 0.6s ease';
+                        
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, 100);
+                    }, index * 100);
                     
-                    // Anima cards em sequência
-                    if (entry.target.classList.contains('feature-card')) {
-                        const cards = document.querySelectorAll('.feature-card');
-                        cards.forEach((card, index) => {
-                            setTimeout(() => {
-                                card.style.opacity = '1';
-                                card.style.transform = 'translateY(0)';
-                            }, index * 100);
-                        });
-                    }
+                    observer.unobserve(entry.target);
                 }
             });
-        }, observerOptions);
+        }, {
+            threshold: 0.1
+        });
         
-        // Observa elementos
-        const animatedElements = document.querySelectorAll(
-            '.feature-card, .pricing-card, .section-header'
-        );
-        
-        animatedElements.forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'all 0.6s ease';
-            observer.observe(el);
+        elements.forEach(element => {
+            element.style.opacity = '0';
+            observer.observe(element);
         });
     };
     
-    // ===== BOTÃO SCROLL TO TOP =====
-    const initScrollToTop = () => {
-        const scrollBtn = document.querySelector('.scroll-top');
+    // ===== EFEITO HOVER NOS CARDS =====
+    const addHoverEffects = () => {
+        const cards = document.querySelectorAll('.stat-card, .feature-card, .step-card');
         
-        // Mostra/esconde botão
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                scrollBtn.classList.add('visible');
-            } else {
-                scrollBtn.classList.remove('visible');
-            }
-        });
-        
-        // Clique para voltar ao topo
-        scrollBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    };
-    
-    // ===== INTERAÇÕES DOS PLANOS =====
-    const initPricingInteractions = () => {
-        const pricingCards = document.querySelectorAll('.pricing-card');
-        
-        pricingCards.forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                // Diminui opacidade dos outros cards
-                pricingCards.forEach(otherCard => {
-                    if (otherCard !== card) {
-                        otherCard.style.opacity = '0.7';
-                    }
-                });
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) scale(1.02)';
             });
             
-            card.addEventListener('mouseleave', () => {
-                // Restaura opacidade
-                pricingCards.forEach(otherCard => {
-                    otherCard.style.opacity = '1';
-                });
-            });
-        });
-        
-        // Botões dos planos
-        const planButtons = document.querySelectorAll('.plan-btn');
-        planButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const planName = btn.closest('.pricing-card').querySelector('.plan-name').textContent;
-                console.log(`💳 Plano selecionado: ${planName}`);
-                alert(`Você selecionou o plano ${planName}! 🎉`);
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
             });
         });
     };
     
-    // ===== ESTATÍSTICAS ANIMADAS =====
-    const animateStats = () => {
-        const stats = document.querySelectorAll('.stat-number');
-        
-        stats.forEach(stat => {
-            const finalValue = stat.textContent;
-            const isRating = finalValue.includes('⭐');
-            const numericValue = parseFloat(finalValue.replace(/[^0-9.]/g, ''));
-            const suffix = finalValue.replace(/[0-9.]/g, '');
-            
-            // Anima do 0 ao valor final
-            let currentValue = 0;
-            const increment = numericValue / 50; // 50 steps
-            const timer = setInterval(() => {
-                currentValue += increment;
-                
-                if (currentValue >= numericValue) {
-                    currentValue = numericValue;
-                    clearInterval(timer);
+    // ===== SMOOTH SCROLL PARA SEÇÕES =====
+    const smoothScroll = () => {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
                 }
-                
-                if (isRating) {
-                    stat.textContent = currentValue.toFixed(1) + suffix;
-                } else {
-                    stat.textContent = Math.floor(currentValue) + suffix;
-                }
-            }, 30);
+            });
         });
     };
     
-    // ===== EFEITO PARALLAX SUTIL =====
-    const initParallax = () => {
-        const floatingElements = document.querySelectorAll('.float-element');
+    // ===== EFEITO PARALLAX SUAVE =====
+    const parallaxEffect = () => {
+        const heroIcon = document.querySelector('.hero-icon');
         
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
+            const speed = 0.5;
             
-            floatingElements.forEach((element, index) => {
-                const speed = 0.5 + (index * 0.1);
-                element.style.transform = `translateY(${scrolled * speed * 0.1}px)`;
-            });
+            if (heroIcon) {
+                heroIcon.style.transform = `translateY(${scrolled * speed}px)`;
+            }
         });
     };
     
-    // ===== VALIDAÇÃO SIMPLES DO FORMULÁRIO =====
-    const initDownloadButtons = () => {
-        const downloadBtns = document.querySelectorAll('.store-btn');
+    // ===== ANIMAÇÃO DO BOTÃO CTA =====
+    const pulseAnimation = () => {
+        const ctaButtons = document.querySelectorAll('.cta-section .btn-white');
         
-        downloadBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                const store = btn.querySelector('img').alt;
-                console.log(`📱 Redirecionando para ${store}`);
-                
-                // Simula redirecionamento
-                alert(`Você seria redirecionado para a ${store}! 📲`);
-            });
-        });
-    };
-    
-    // ===== EASTER EGG SIMPLES =====
-    const initEasterEgg = () => {
-        let clickCount = 0;
-        const logo = document.querySelector('.logo');
-        
-        logo.addEventListener('click', () => {
-            clickCount++;
-            
-            if (clickCount === 5) {
-                console.log('🎉 Easter egg ativado!');
-                document.body.style.animation = 'rainbow 3s ease-in-out';
-                
-                // Remove animação após 3 segundos
+        ctaButtons.forEach(button => {
+            setInterval(() => {
+                button.style.animation = 'pulse 1s ease-in-out';
                 setTimeout(() => {
-                    document.body.style.animation = '';
-                }, 3000);
-                
-                clickCount = 0;
-            }
+                    button.style.animation = '';
+                }, 1000);
+            }, 5000);
         });
-        
-        // Adiciona keyframe para easter egg
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes rainbow {
-                0% { filter: hue-rotate(0deg); }
-                100% { filter: hue-rotate(360deg); }
-            }
-        `;
-        document.head.appendChild(style);
     };
     
-    // ===== CONSOLE LOGS INFORMATIVOS =====
-    const logSystemInfo = () => {
-        console.log('📊 Zen Mind - Sistema de Informações:');
-        console.log('✅ Smooth scroll ativo');
-        console.log('✅ Animações de scroll ativas');
-        console.log('✅ Menu mobile pronto');
-        console.log('✅ Interações de UI carregadas');
-        console.log('💡 Dica: Clique 5x no logo para uma surpresa!');
+    // ===== MENSAGEM DE BOAS-VINDAS =====
+    const showWelcomeMessage = () => {
+        const isFirstVisit = !localStorage.getItem('zenMindVisited');
+        
+        if (isFirstVisit) {
+            setTimeout(() => {
+                console.log('🎉 Primeira visita detectada!');
+                // Poderia mostrar um modal de boas-vindas aqui
+                localStorage.setItem('zenMindVisited', 'true');
+            }, 2000);
+        }
+    };
+    
+    // ===== LAZY LOADING DE IMAGENS =====
+    const lazyLoadImages = () => {
+        const images = document.querySelectorAll('img[data-src]');
+        
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.classList.add('loaded');
+                    imageObserver.unobserve(img);
+                }
+            });
+        });
+        
+        images.forEach(img => imageObserver.observe(img));
+    };
+    
+    // ===== TOOLTIP NOS ÍCONES =====
+    const addTooltips = () => {
+        const icons = document.querySelectorAll('.feature-icon, .stat-icon');
+        
+        icons.forEach(icon => {
+            icon.addEventListener('mouseenter', function() {
+                const tooltip = document.createElement('div');
+                tooltip.className = 'tooltip';
+                tooltip.textContent = 'Clique para saber mais';
+                tooltip.style.cssText = `
+                    position: absolute;
+                    background: #333;
+                    color: white;
+                    padding: 0.5rem 1rem;
+                    border-radius: 5px;
+                    font-size: 0.875rem;
+                    pointer-events: none;
+                    transform: translateY(-100%);
+                    margin-top: -10px;
+                    white-space: nowrap;
+                    opacity: 0;
+                    transition: opacity 0.3s ease;
+                `;
+                
+                this.appendChild(tooltip);
+                setTimeout(() => tooltip.style.opacity = '1', 10);
+            });
+            
+            icon.addEventListener('mouseleave', function() {
+                const tooltip = this.querySelector('.tooltip');
+                if (tooltip) {
+                    tooltip.style.opacity = '0';
+                    setTimeout(() => tooltip.remove(), 300);
+                }
+            });
+        });
     };
     
     // ===== INICIALIZAÇÃO =====
     const init = () => {
-        initSmoothScroll();
-        initNavScroll();
-        initMobileMenu();
-        initBreathingAnimation();
-        initScrollAnimations();
-        initScrollToTop();
-        initPricingInteractions();
-        initParallax();
-        initDownloadButtons();
-        initEasterEgg();
+        animateNumbers();
+        animateOnScroll();
+        addHoverEffects();
+        smoothScroll();
+        parallaxEffect();
+        pulseAnimation();
+        showWelcomeMessage();
+        lazyLoadImages();
+        addTooltips();
         
-        // Anima estatísticas quando aparecem
-        setTimeout(animateStats, 1000);
-        
-        // Logs do sistema
-        logSystemInfo();
-        
-        console.log('🧘 Zen Mind totalmente carregado e funcional!');
+        console.log('✅ Todas as animações da homepage carregadas');
     };
     
-    // Inicia tudo
+    // Inicializar
     init();
 });
 
-// ===== ESTILOS DINÂMICOS PARA MOBILE MENU =====
-const mobileMenuStyles = `
-    .mobile-menu {
-        position: fixed;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        background: rgba(255, 255, 255, 0.98);
-        backdrop-filter: blur(10px);
-        transform: translateY(-100%);
-        transition: transform 0.3s ease;
-        z-index: 999;
-        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+// ===== ESTILOS DINÂMICOS =====
+const dynamicStyles = `
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
     }
     
-    .mobile-menu.active {
-        transform: translateY(0);
+    .tooltip {
+        z-index: 1000;
     }
     
-    .mobile-links {
-        list-style: none;
-        padding: 2rem;
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
+    .loaded {
+        animation: fadeIn 0.5s ease;
     }
     
-    .mobile-links a {
-        color: var(--text-primary);
-        text-decoration: none;
-        font-size: 1.1rem;
-        font-weight: 500;
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
     }
 `;
 
-// Adiciona estilos ao documento
 const styleSheet = document.createElement('style');
-styleSheet.textContent = mobileMenuStyles;
+styleSheet.textContent = dynamicStyles;
 document.head.appendChild(styleSheet);
 
-// Mensagem final
-console.log('🌟 Bem-vindo ao Zen Mind - Encontre sua paz interior!');
+console.log('🌟 Zen Mind Homepage - Pronta para meditação!');

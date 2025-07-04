@@ -1,236 +1,264 @@
-%rebase('base.tpl', title='Zen Mind - Meditação Guiada para o Dia a Dia', extra_css='')
+%rebase('base.tpl', title='Zen Mind - Sua Jornada de Meditação Começa Aqui', extra_css='')
 
-<!-- Main Container -->
-<div class="container">
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <h1 class="hero-title">
-                Encontre sua <span class="gradient-text">paz interior</span> 
-                em apenas 5 minutos por dia
-            </h1>
-            <p class="hero-subtitle">
-                Meditações guiadas, sons relaxantes e exercícios de respiração 
-                para reduzir o estresse e melhorar seu bem-estar.
-            </p>
-            <div class="hero-buttons">
-                % if defined('current_user') and current_user:
-                    <a href="/dashboard" class="primary-btn">
-                        <span class="btn-icon">🧘</span>
-                        Meu Dashboard
-                    </a>
-                    <a href="/meditacoes/nova" class="secondary-btn">
-                        Nova Meditação
-                    </a>
-                % else:
-                    <a href="/register" class="primary-btn">
-                        <span class="btn-icon">📱</span>
-                        Começar Grátis
-                    </a>
-                    <a href="/login" class="secondary-btn">
-                        Já tenho conta
-                    </a>
-                % end
-            </div>
-            <div class="hero-stats">
-                <div class="stat">
-                    <span class="stat-number">2M+</span>
-                    <span class="stat-label">Usuários ativos</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">4.8⭐</span>
-                    <span class="stat-label">Avaliação</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">500+</span>
-                    <span class="stat-label">Meditações</span>
-                </div>
-            </div>
-        </div>
-        <div class="hero-visual">
-            <div class="phone-mockup">
-                <div class="phone-screen">
-                    <div class="app-interface">
-                        <div class="breathing-circle"></div>
-                        <p class="breathing-text">Respire...</p>
-                    </div>
-                </div>
-            </div>
-            <div class="floating-elements">
-                <div class="float-element element-1">😌</div>
-                <div class="float-element element-2">🌸</div>
-                <div class="float-element element-3">☮️</div>
-                <div class="float-element element-4">✝️</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <div class="section-header">
-            <h2 class="section-title">Recursos que transformam sua rotina</h2>
-            <p class="section-subtitle">Tudo que você precisa para uma mente mais calma e focada</p>
-        </div>
+<!-- Hero Section Minimalista -->
+<section style="min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%); position: relative; overflow: hidden;">
+    <!-- Elementos flutuantes sutis -->
+    <div style="position: absolute; top: 10%; left: 5%; font-size: 100px; opacity: 0.05; animation: float 20s ease-in-out infinite;">🧘</div>
+    <div style="position: absolute; bottom: 15%; right: 10%; font-size: 80px; opacity: 0.05; animation: float 25s ease-in-out infinite;">☮️</div>
+    <div style="position: absolute; top: 50%; left: 80%; font-size: 60px; opacity: 0.05; animation: float 30s ease-in-out infinite;">🕉️</div>
+    
+    <div class="container" style="text-align: center; z-index: 10;">
+        <h1 style="font-size: clamp(3rem, 8vw, 5rem); font-weight: 700; color: #1a1a2e; margin-bottom: 1.5rem; letter-spacing: -2px;">
+            Encontre a <span style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">paz</span> 
+            <br>que existe em você
+        </h1>
         
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <span>🎧</span>
-                </div>
-                <h3>Meditações Guiadas</h3>
-                <p>Sessões de 5 a 60 minutos com instrutores certificados para todos os níveis.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <span>🌙</span>
-                </div>
-                <h3>Histórias para Dormir</h3>
-                <p>Narrativas relaxantes que ajudam você a ter uma noite de sono tranquila.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <span>🌊</span>
-                </div>
-                <h3>Sons da Natureza</h3>
-                <p>Biblioteca com sons de chuva, oceano, floresta e muito mais.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <span>📊</span>
-                </div>
-                <h3>Acompanhe seu Progresso</h3>
-                <p>Estatísticas detalhadas sobre sua jornada de meditação e bem-estar.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <span>💨</span>
-                </div>
-                <h3>Exercícios de Respiração</h3>
-                <p>Técnicas guiadas para reduzir ansiedade e aumentar o foco.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <span>🔔</span>
-                </div>
-                <h3>Lembretes Personalizados</h3>
-                <p>Notificações gentis para manter sua prática diária.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section class="pricing" id="pricing">
-        <div class="section-header">
-            <h2 class="section-title">Escolha seu plano</h2>
-            <p class="section-subtitle">Comece grátis e evolua no seu ritmo</p>
-        </div>
+        <p style="font-size: clamp(1.2rem, 3vw, 1.5rem); color: #6c757d; max-width: 600px; margin: 0 auto 3rem; line-height: 1.6; font-weight: 300;">
+            Transforme minutos em momentos de clareza. Meditação guiada para o seu dia a dia.
+        </p>
         
-        <div class="pricing-cards">
-            <div class="pricing-card">
-                <h3 class="plan-name">Gratuito</h3>
-                <div class="plan-price">
-                    <span class="price">R$ 0</span>
-                    <span class="period">/mês</span>
-                </div>
-                <ul class="plan-features">
-                    <li>10 meditações básicas</li>
-                    <li>3 sons relaxantes</li>
-                    <li>Exercícios de respiração</li>
-                    <li>Acompanhamento básico</li>
-                </ul>
-                % if defined('current_user') and current_user:
-                    <a href="/dashboard" class="plan-btn secondary">Ir ao Dashboard</a>
-                % else:
-                    <a href="/register" class="plan-btn secondary">Começar Agora</a>
-                % end
-            </div>
-            
-            <div class="pricing-card featured">
-                <div class="popular-badge">Mais Popular</div>
-                <h3 class="plan-name">Premium</h3>
-                <div class="plan-price">
-                    <span class="price">R$ 19,90</span>
-                    <span class="period">/mês</span>
-                </div>
-                <ul class="plan-features">
-                    <li>500+ meditações</li>
-                    <li>Todos os sons e músicas</li>
-                    <li>Histórias para dormir</li>
-                    <li>Modo offline</li>
-                    <li>Estatísticas avançadas</li>
-                    <li>Sem anúncios</li>
-                </ul>
-                % if defined('current_user') and current_user:
-                    <a href="/meditacoes" class="plan-btn primary">Ver Meditações</a>
-                % else:
-                    <a href="/register" class="plan-btn primary">Teste 7 dias grátis</a>
-                % end
-            </div>
-            
-            <div class="pricing-card">
-                <h3 class="plan-name">Família</h3>
-                <div class="plan-price">
-                    <span class="price">R$ 29,90</span>
-                    <span class="period">/mês</span>
-                </div>
-                <ul class="plan-features">
-                    <li>Tudo do Premium</li>
-                    <li>Até 6 contas</li>
-                    <li>Conteúdo para crianças</li>
-                    <li>Controle parental</li>
-                    <li>Suporte prioritário</li>
-                </ul>
-                % if defined('current_user') and current_user:
-                    <a href="/forum" class="plan-btn secondary">Visitar Fórum</a>
-                % else:
-                    <a href="/register" class="plan-btn secondary">Escolher Plano</a>
-                % end
-            </div>
-        </div>
-    </section>
-
-    <!-- Download Section -->
-    <section class="download" id="download">
-        <div class="download-content">
-            <h2 class="download-title">Pronto para transformar sua vida?</h2>
-            <p class="download-subtitle">
-                % if defined('current_user') and current_user:
-                    Continue sua jornada de meditação e explore todos os recursos disponíveis.
-                % else:
-                    Junte-se a milhões de pessoas que já descobriram os benefícios da meditação diária.
-                % end
-            </p>
-            <div class="download-buttons">
-                % if defined('current_user') and current_user:
-                    <a href="/meditacoes/nova" class="store-btn" style="background: linear-gradient(45deg, #667eea, #764ba2); color: white; text-decoration: none; padding: 12px 24px; border-radius: 8px; display: inline-block; margin: 0 10px;">
-                        Nova Meditação
-                    </a>
-                    <a href="/helper" class="store-btn" style="background: linear-gradient(45deg, #667eea, #764ba2); color: white; text-decoration: none; padding: 12px 24px; border-radius: 8px; display: inline-block; margin: 0 10px;">
-                        Documentação
-                    </a>
-                % else:
-                    <a href="/register" class="store-btn">
-                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjQwIiB2aWV3Qm94PSIwIDAgMTIwIDQwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iMTIwIiBoZWlnaHQ9IjQwIiByeD0iOCIgZmlsbD0iYmxhY2siLz4KPHRleHQgeD0iNjAiIHk9IjI1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0Ij5DcmllIENvbnRhPC90ZXh0Pgo8L3N2Zz4=" alt="Criar Conta">
-                    </a>
-                    <a href="/login" class="store-btn">
-                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjQwIiB2aWV3Qm94PSIwIDAgMTIwIDQwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iMTIwIiBoZWlnaHQ9IjQwIiByeD0iOCIgZmlsbD0iYmxhY2siLz4KPHRleHQgeD0iNjAiIHk9IjI1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0Ij5GYXplciBMb2dpbjwvdGV4dD4KPC9zdmc+" alt="Fazer Login">
-                    </a>
-                % end
-            </div>
-            % if not (defined('current_user') and current_user):
-            <div class="qr-code">
-                <div class="qr-placeholder">QR</div>
-                <p>Escaneie para baixar</p>
-            </div>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            % if defined('current_user') and current_user:
+                <a href="/dashboard" style="background: #1a1a2e; color: white; padding: 1rem 3rem; border-radius: 50px; text-decoration: none; font-size: 1.1rem; font-weight: 500; transition: all 0.3s ease; display: inline-block;">
+                    Continuar jornada
+                </a>
+                <a href="/meditacoes/nova" style="background: transparent; color: #1a1a2e; padding: 1rem 3rem; border-radius: 50px; text-decoration: none; font-size: 1.1rem; font-weight: 500; border: 2px solid #1a1a2e; transition: all 0.3s ease; display: inline-block;">
+                    Nova meditação
+                </a>
+            % else:
+                <a href="/register" style="background: #1a1a2e; color: white; padding: 1rem 3rem; border-radius: 50px; text-decoration: none; font-size: 1.1rem; font-weight: 500; transition: all 0.3s ease; display: inline-block;">
+                    Começar gratuitamente
+                </a>
+                <a href="/login" style="background: transparent; color: #1a1a2e; padding: 1rem 3rem; border-radius: 50px; text-decoration: none; font-size: 1.1rem; font-weight: 500; border: 2px solid #1a1a2e; transition: all 0.3s ease; display: inline-block;">
+                    Entrar
+                </a>
             % end
         </div>
-    </section>
-</div>
+        
+        <!-- Indicador de scroll -->
+        <div style="position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); animation: bounce 2s infinite;">
+            <div style="width: 30px; height: 50px; border: 2px solid #ccc; border-radius: 25px; position: relative;">
+                <div style="width: 4px; height: 8px; background: #ccc; border-radius: 2px; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); animation: scroll 2s infinite;"></div>
+            </div>
+        </div>
+    </div>
+</section>
 
-<!-- Scroll to top button -->
-<button class="scroll-top" aria-label="Voltar ao topo">↑</button>
+<!-- Números que Importam -->
+<section style="padding: 5rem 0; background: white;">
+    <div class="container">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; text-align: center;">
+            <div>
+                <h2 style="font-size: 3rem; font-weight: 700; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem;">5 min</h2>
+                <p style="color: #6c757d; font-size: 1.1rem;">É tudo que você precisa para começar</p>
+            </div>
+            <div>
+                <h2 style="font-size: 3rem; font-weight: 700; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem;">87%</h2>
+                <p style="color: #6c757d; font-size: 1.1rem;">Relatam redução do estresse</p>
+            </div>
+            <div>
+                <h2 style="font-size: 3rem; font-weight: 700; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem;">∞</h2>
+                <p style="color: #6c757d; font-size: 1.1rem;">Possibilidades de crescimento</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Como Funciona -->
+<section style="padding: 5rem 0; background: #f8f9fa;">
+    <div class="container">
+        <h2 style="font-size: 2.5rem; font-weight: 700; text-align: center; color: #1a1a2e; margin-bottom: 4rem;">
+            Simples como respirar
+        </h2>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; max-width: 1000px; margin: 0 auto;">
+            <div style="text-align: center;">
+                <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 2rem; color: white;">1</div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #1a1a2e;">Crie sua conta</h3>
+                <p style="color: #6c757d; line-height: 1.6;">Registro gratuito em segundos. Sem cartão de crédito.</p>
+            </div>
+            
+            <div style="text-align: center;">
+                <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 2rem; color: white;">2</div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #1a1a2e;">Escolha sua prática</h3>
+                <p style="color: #6c757d; line-height: 1.6;">Crie meditações personalizadas ou use as sugestões.</p>
+            </div>
+            
+            <div style="text-align: center;">
+                <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 2rem; color: white;">3</div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #1a1a2e;">Respire e transforme</h3>
+                <p style="color: #6c757d; line-height: 1.6;">Sinta os benefícios desde a primeira sessão.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Benefícios -->
+<section style="padding: 5rem 0; background: white;">
+    <div class="container">
+        <h2 style="font-size: 2.5rem; font-weight: 700; text-align: center; color: #1a1a2e; margin-bottom: 1rem;">
+            Por que meditar?
+        </h2>
+        <p style="text-align: center; color: #6c757d; font-size: 1.2rem; margin-bottom: 4rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+            A ciência comprova: meditação transforma sua vida
+        </p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
+            <div style="background: #f8f9fa; padding: 2.5rem; border-radius: 20px; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🧠</div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #1a1a2e;">Clareza Mental</h3>
+                <p style="color: #6c757d; line-height: 1.6;">Melhore o foco, a concentração e a capacidade de tomar decisões com mais consciência.</p>
+            </div>
+            
+            <div style="background: #f8f9fa; padding: 2.5rem; border-radius: 20px; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">💚</div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #1a1a2e;">Bem-estar Emocional</h3>
+                <p style="color: #6c757d; line-height: 1.6;">Reduza ansiedade e estresse. Cultive paz interior e equilíbrio emocional duradouro.</p>
+            </div>
+            
+            <div style="background: #f8f9fa; padding: 2.5rem; border-radius: 20px; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">😴</div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #1a1a2e;">Sono Reparador</h3>
+                <p style="color: #6c757d; line-height: 1.6;">Melhore a qualidade do sono e acorde revigorado para enfrentar o dia.</p>
+            </div>
+            
+            <div style="background: #f8f9fa; padding: 2.5rem; border-radius: 20px; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🌟</div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #1a1a2e;">Autoconhecimento</h3>
+                <p style="color: #6c757d; line-height: 1.6;">Conecte-se com sua essência e descubra seu potencial interior inexplorado.</p>
+            </div>
+            
+            <div style="background: #f8f9fa; padding: 2.5rem; border-radius: 20px; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🤝</div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #1a1a2e;">Relacionamentos</h3>
+                <p style="color: #6c757d; line-height: 1.6;">Desenvolva empatia, paciência e melhore suas conexões pessoais.</p>
+            </div>
+            
+            <div style="background: #f8f9fa; padding: 2.5rem; border-radius: 20px; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">⚡</div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #1a1a2e;">Energia Vital</h3>
+                <p style="color: #6c757d; line-height: 1.6;">Aumente sua vitalidade e disposição para viver cada momento plenamente.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Depoimentos -->
+<section style="padding: 5rem 0; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+    <div class="container">
+        <h2 style="font-size: 2.5rem; font-weight: 700; text-align: center; margin-bottom: 4rem;">
+            Histórias de transformação
+        </h2>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; max-width: 1000px; margin: 0 auto;">
+            <div style="background: rgba(255, 255, 255, 0.1); padding: 2rem; border-radius: 15px; backdrop-filter: blur(10px);">
+                <div style="font-size: 2rem; margin-bottom: 1rem;">⭐⭐⭐⭐⭐</div>
+                <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem; font-style: italic;">
+                    "Zen Mind mudou minha vida. Em apenas 2 semanas, minha ansiedade diminuiu drasticamente e consigo dormir melhor."
+                </p>
+                <p style="font-weight: 600;">— Ana Silva</p>
+                <p style="opacity: 0.8; font-size: 0.9rem;">Praticante há 3 meses</p>
+            </div>
+            
+            <div style="background: rgba(255, 255, 255, 0.1); padding: 2rem; border-radius: 15px; backdrop-filter: blur(10px);">
+                <div style="font-size: 2rem; margin-bottom: 1rem;">⭐⭐⭐⭐⭐</div>
+                <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem; font-style: italic;">
+                    "Como empreendedor, o estresse era constante. Agora, 10 minutos de meditação me dão clareza para o dia todo."
+                </p>
+                <p style="font-weight: 600;">— Carlos Mendes</p>
+                <p style="opacity: 0.8; font-size: 0.9rem;">Praticante há 6 meses</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Comunidade -->
+<section style="padding: 5rem 0; background: white;">
+    <div class="container" style="text-align: center;">
+        <h2 style="font-size: 2.5rem; font-weight: 700; color: #1a1a2e; margin-bottom: 1rem;">
+            Você não está sozinho
+        </h2>
+        <p style="color: #6c757d; font-size: 1.2rem; margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+            Junte-se a uma comunidade acolhedora de praticantes que compartilham experiências e crescem juntos.
+        </p>
+        
+        % if defined('current_user') and current_user:
+            <a href="/forum" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 1rem 3rem; border-radius: 50px; text-decoration: none; font-size: 1.1rem; font-weight: 500; transition: all 0.3s ease; display: inline-block;">
+                Acessar Fórum
+            </a>
+        % else:
+            <a href="/register" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 1rem 3rem; border-radius: 50px; text-decoration: none; font-size: 1.1rem; font-weight: 500; transition: all 0.3s ease; display: inline-block;">
+                Fazer parte
+            </a>
+        % end
+    </div>
+</section>
+
+<!-- CTA Final -->
+<section style="padding: 5rem 0; background: #f8f9fa;">
+    <div class="container" style="text-align: center;">
+        <h2 style="font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; color: #1a1a2e; margin-bottom: 1.5rem;">
+            Sua jornada começa com uma respiração
+        </h2>
+        <p style="color: #6c757d; font-size: 1.2rem; margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+            Não espere o momento perfeito. O momento é agora.
+        </p>
+        
+        % if defined('current_user') and current_user:
+            <a href="/meditacoes/nova" style="background: #1a1a2e; color: white; padding: 1.25rem 3.5rem; border-radius: 50px; text-decoration: none; font-size: 1.2rem; font-weight: 500; transition: all 0.3s ease; display: inline-block; box-shadow: 0 10px 30px rgba(26, 26, 46, 0.3);">
+                Criar nova meditação
+            </a>
+        % else:
+            <a href="/register" style="background: #1a1a2e; color: white; padding: 1.25rem 3.5rem; border-radius: 50px; text-decoration: none; font-size: 1.2rem; font-weight: 500; transition: all 0.3s ease; display: inline-block; box-shadow: 0 10px 30px rgba(26, 26, 46, 0.3);">
+                Começar agora - É grátis
+            </a>
+        % end
+    </div>
+</section>
+
+<!-- Animações CSS -->
+<style>
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+    40% { transform: translateY(-10px) translateX(-50%); }
+    60% { transform: translateY(-5px) translateX(-50%); }
+}
+
+@keyframes scroll {
+    0% { transform: translateY(0) translateX(-50%); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(20px) translateX(-50%); opacity: 0; }
+}
+
+/* Hover effects */
+a[style*="background: #1a1a2e"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(26, 26, 46, 0.4) !important;
+}
+
+a[style*="background: transparent"]:hover {
+    background: #1a1a2e !important;
+    color: white !important;
+}
+
+a[style*="background: linear-gradient"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4) !important;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    section { padding: 3rem 0 !important; }
+    h1 { letter-spacing: -1px !important; }
+    .container > div[style*="grid-template-columns"] {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+    }
+}
+</style>
