@@ -28,5 +28,29 @@
     "email": "ana@gmail.com",
     "password": "123456",
     "created_at": "2025-07-02T16:59:10.704378"
+  },
+  {
+    "username": "ana",
+    "email": "123@gmail.com",
+    "password": "123123",
+    "created_at": "2025-07-04T08:54:53.864581"
+  },
+  {
+    "username": "Ana12",
+    "email": "ana@gmailaa.com",
+    "password": "123123",
+    "created_at": "2025-07-04T09:10:14.539800"
+  },
+  {
+    "username": "ana345",
+    "email": "ana345@gmail.com",
+    "password": "123123",
+    "created_at": "2025-07-04T09:20:16.948649"
+  },
+  {
+    "username": "ana123123",
+    "email": "ana@123gmail.com",
+    "password": "123123",
+    "created_at": "2025-07-04T09:27:49.480536"
   }
 ]
