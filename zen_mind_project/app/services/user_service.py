@@ -33,6 +33,7 @@ class UserService:
             with open(self.file_path, 'w', encoding='utf-8') as file:
                 data = [user.to_dict() for user in self.users]
                 json.dump(data, file, indent=2, ensure_ascii=False)
+            print(f"[DEBUG] Usuários salvos com sucesso: {len(self.users)} usuários")
         except Exception as e:
             print(f"Erro ao salvar usuários: {e}")
     
@@ -119,6 +120,45 @@ class UserService:
         self.save_users()
         return True, "Usuário atualizado com sucesso"
     
+    def update_user_profile(self, current_user, new_username=None, new_email=None, new_password=None):
+        """Atualiza perfil do usuário - método específico para perfil"""
+        try:
+            # Validações
+            if new_username and new_username != current_user.username:
+                if self.username_exists(new_username):
+                    return False, "Nome de usuário já existe"
+                if len(new_username) < 3 or len(new_username) > 20:
+                    return False, "Nome de usuário deve ter entre 3 e 20 caracteres"
+            
+            if new_email and new_email != current_user.email:
+                if self.email_exists(new_email):
+                    return False, "Email já está sendo usado por outro usuário"
+                if '@' not in new_email or '.' not in new_email:
+                    return False, "Email inválido"
+            
+            if new_password:
+                if len(new_password) < 6:
+                    return False, "Nova senha deve ter pelo menos 6 caracteres"
+            
+            # Aplicar alterações
+            if new_username:
+                current_user.username = new_username
+            
+            if new_email:
+                current_user.email = new_email
+            
+            if new_password:
+                current_user.password = new_password
+            
+            # Salvar alterações
+            self.save_users()
+            
+            return True, "Perfil atualizado com sucesso"
+            
+        except Exception as e:
+            print(f"Erro ao atualizar perfil: {e}")
+            return False, "Erro interno ao atualizar perfil"
+    
     # DELETE
     def delete_user(self, username):
         """Remove um usuário"""
@@ -126,9 +166,40 @@ class UserService:
         if not user:
             return False, "Usuário não encontrado"
         
+        # Não permitir deletar admin
+        if username == 'admin':
+            return False, "Não é possível deletar o usuário admin"
+        
         self.users.remove(user)
         self.save_users()
         return True, "Usuário removido com sucesso"
+    
+    def delete_user_and_data(self, username):
+        """Remove usuário e todos os seus dados relacionados"""
+        try:
+            # Deletar todas as meditações do usuário
+            from app.services import meditation_service
+            user_meditations = meditation_service.get_meditations_by_user(username)
+            for meditation in user_meditations:
+                meditation_service.delete_meditation(meditation.id, username)
+            
+            # Deletar todos os posts do usuário no fórum
+            from app.services import forum_service
+            user_posts = forum_service.get_posts_by_user(username)
+            for post in user_posts:
+                forum_service.delete_post(post.id, username)
+            
+            # Deletar o usuário
+            success, message = self.delete_user(username)
+            
+            if success:
+                return True, "Conta e todos os dados relacionados foram deletados com sucesso"
+            else:
+                return False, message
+                
+        except Exception as e:
+            print(f"Erro ao deletar usuário e dados: {e}")
+            return False, "Erro interno ao deletar conta"
     
     # AUTHENTICATION
     def authenticate_user(self, username, password):
@@ -141,3 +212,49 @@ class UserService:
     def get_user_count(self):
         """Retorna número total de usuários"""
         return len(self.users)
+    
+    # STATISTICS
+    def get_user_statistics(self, username):
+        """Retorna estatísticas completas do usuário"""
+        try:
+            from app.services import meditation_service, forum_service
+            
+            # Estatísticas de meditação
+            meditation_stats = meditation_service.get_user_stats(username)
+            
+            # Estatísticas do fórum
+            user_posts = forum_service.get_posts_by_user(username)
+            
+            # Calcular dados adicionais
+            user = self.get_user_by_username(username)
+            account_age_days = 0
+            if user and hasattr(user, 'created_at'):
+                try:
+                    created_date = datetime.fromisoformat(user.created_at)
+                    account_age_days = (datetime.now() - created_date).days
+                except:
+                    account_age_days = 0
+            
+            return {
+                'meditation_stats': meditation_stats,
+                'forum_posts': len(user_posts),
+                'account_age_days': account_age_days,
+                'total_meditations': meditation_stats.get('total_meditations', 0),
+                'total_meditation_time': meditation_stats.get('total_duration', 0),
+                'average_meditation_duration': meditation_stats.get('average_duration', 0),
+                'meditation_categories': meditation_stats.get('categories', {}),
+                'is_active_user': meditation_stats.get('total_meditations', 0) > 0 or len(user_posts) > 0
+            }
+            
+        except Exception as e:
+            print(f"Erro ao obter estatísticas do usuário: {e}")
+            return {
+                'meditation_stats': {},
+                'forum_posts': 0,
+                'account_age_days': 0,
+                'total_meditations': 0,
+                'total_meditation_time': 0,
+                'average_meditation_duration': 0,
+                'meditation_categories': {},
+                'is_active_user': False
+            }

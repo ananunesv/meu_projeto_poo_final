@@ -22,6 +22,20 @@ class MeditationController:
         """Retorna usuário atual"""
         return get_current_user()
     
+    def _clean_text(self, text):
+        """Limpa e valida texto de entrada"""
+        if not text:
+            return ""
+        
+        # Remove quebras de linha excessivas e espaços
+        text = ' '.join(text.strip().split())
+        
+        # Limita o tamanho
+        if len(text) > 500:
+            text = text[:500]
+        
+        return text
+    
     @login_required
     def dashboard(self):
         """Dashboard principal do usuário"""
@@ -95,9 +109,24 @@ class MeditationController:
         
         # Capturar dados do formulário
         title = request.forms.get('title', '').strip()
-        duration = request.forms.get('duration', '').strip()
+        duration_str = request.forms.get('duration', '').strip()
         category = request.forms.get('category', '').strip()
         description = request.forms.get('description', '').strip()
+        
+        # Validar e limpar dados
+        title = self._clean_text(title)
+        description = self._clean_text(description)
+        
+        # Validação adicional
+        try:
+            duration = int(duration_str) if duration_str else 0
+        except ValueError:
+            duration = 0
+        
+        # Verificar se a categoria é válida
+        valid_categories = ['respiracao', 'mindfulness', 'relaxamento', 'concentracao', 'sono', 'estresse']
+        if category not in valid_categories:
+            category = ''
         
         # Tentar criar meditação
         meditation, message = self.meditation_service.create_meditation(
@@ -117,7 +146,7 @@ class MeditationController:
                            error=message,
                            form_data={
                                'title': title,
-                               'duration': duration,
+                               'duration': duration_str,
                                'category': category,
                                'description': description
                            })
@@ -168,9 +197,24 @@ class MeditationController:
         
         # Capturar dados do formulário
         title = request.forms.get('title', '').strip()
-        duration = request.forms.get('duration', '').strip()
+        duration_str = request.forms.get('duration', '').strip()
         category = request.forms.get('category', '').strip()
         description = request.forms.get('description', '').strip()
+        
+        # Validar e limpar dados
+        title = self._clean_text(title)
+        description = self._clean_text(description)
+        
+        # Validação adicional
+        try:
+            duration = int(duration_str) if duration_str else meditation.duration
+        except ValueError:
+            duration = meditation.duration
+        
+        # Verificar se a categoria é válida
+        valid_categories = ['respiracao', 'mindfulness', 'relaxamento', 'concentracao', 'sono', 'estresse']
+        if category not in valid_categories:
+            category = meditation.category
         
         # Tentar atualizar
         success, message = self.meditation_service.update_meditation(

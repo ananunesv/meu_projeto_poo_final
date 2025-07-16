@@ -57,13 +57,21 @@
                                     </span>
                                     <span style="display: flex; align-items: center; gap: 0.5rem;">
                                         <span style="font-size: 1.2rem;">📅</span>
-                                        Criada em {{med.created_at[:10] if hasattr(med, 'created_at') else 'Data não disponível'}}
+                                        % try:
+                                            Criada em {{med.created_at[:10] if hasattr(med, 'created_at') and med.created_at else 'Data não disponível'}}
+                                        % except:
+                                            Data não disponível
+                                        % end
                                     </span>
                                 </div>
                                 
                                 % if hasattr(med, 'description') and med.description:
-                                    <p style="color: #555; line-height: 1.6; margin: 0;">
-                                        {{med.description[:150]}}{% if len(med.description) > 150 %}...{% end %}
+                                    <p style="color: #555; line-height: 1.6; margin: 0; word-wrap: break-word; overflow-wrap: break-word;">
+                                        % if len(str(med.description)) > 150:
+                                            {{str(med.description)[:150]}}...
+                                        % else:
+                                            {{med.description}}
+                                        % end
                                     </p>
                                 % end
                             </div>

@@ -127,6 +127,27 @@ def logout():
     """Processar logout"""
     return auth_ctrl.logout()
 
+# ===== ROTAS DE PERFIL =====
+@app.route('/perfil')
+def profile_page():
+    """Página do perfil do usuário"""
+    return auth_ctrl.profile_page()
+
+@app.route('/perfil/editar', method='GET')
+def edit_profile_page():
+    """Página de edição do perfil"""
+    return auth_ctrl.edit_profile_page()
+
+@app.route('/perfil/editar', method='POST')
+def update_profile():
+    """Processar atualização do perfil"""
+    return auth_ctrl.update_profile()
+
+@app.route('/perfil/deletar', method='POST')
+def delete_account():
+    """Deletar conta do usuário"""
+    return auth_ctrl.delete_account()
+
 # ===== ROTAS DE MEDITAÇÃO =====
 @app.route('/dashboard')
 def dashboard():
@@ -230,6 +251,8 @@ if __name__ == '__main__':
     print("   - CRUD de meditações")
     print("   - Fórum da comunidade")
     print("   - Dashboard personalizado")
+    print("   - Perfil do usuário (CRUD completo)")
+    print(f"👤 Perfil: http://{HOST}:{PORT}/perfil")
     print(f"🔍 Debug sessão: http://{HOST}:{PORT}/debug/session")
     
     try:

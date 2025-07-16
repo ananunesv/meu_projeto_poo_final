@@ -156,6 +156,108 @@
             gap: 0.5rem;
             font-size: 0.9rem;
         }
+        
+        /* Menu dropdown do usuário */
+        .user-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .user-dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            z-index: 1000;
+            overflow: hidden;
+            border: 1px solid #e9ecef;
+        }
+        
+        .user-dropdown:hover .user-dropdown-content {
+            display: block;
+        }
+        
+        .user-dropdown-content a {
+            color: #333;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #f8f9fa;
+        }
+        
+        .user-dropdown-content a:hover {
+            background-color: #f8f9fa;
+            color: #667eea;
+        }
+        
+        .user-dropdown-content a:last-child {
+            border-bottom: none;
+        }
+        
+        .user-avatar {
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-right: 0.75rem;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            background: rgba(102, 126, 234, 0.1);
+        }
+        
+        .user-info:hover {
+            background: rgba(102, 126, 234, 0.15);
+        }
+        
+        .user-details {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .user-name {
+            font-weight: 600;
+            color: #333;
+            font-size: 0.9rem;
+        }
+        
+        .user-status {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        /* Mobile responsivo */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .nav-container {
+                flex-wrap: wrap;
+            }
+            
+            .user-dropdown-content {
+                right: -100px;
+                min-width: 180px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -173,10 +275,43 @@
                     <li><a href="/dashboard">Dashboard</a></li>
                     <li><a href="/meditacoes">Minhas Meditações</a></li>
                     <li><a href="/forum">Fórum</a></li>
-                    <li class="user-menu">
-                        <span>Olá, {{current_user.username}}!</span>
-                        <form method="post" action="/logout" style="display:inline;">
-                            <button type="submit" class="logout-btn">Sair</button>
+                    
+                    <!-- Menu dropdown do usuário -->
+                    <li class="user-dropdown">
+                        <div class="user-info">
+                            <div class="user-avatar">{{current_user.username[0].upper()}}</div>
+                            <div class="user-details">
+                                <div class="user-name">{{current_user.username}}</div>
+                                <div class="user-status">Online</div>
+                            </div>
+                            <span style="margin-left: 0.5rem; color: #666;">▼</span>
+                        </div>
+                        
+                        <div class="user-dropdown-content">
+                            <a href="/perfil">
+                                <span style="margin-right: 0.5rem;">👤</span>
+                                Meu Perfil
+                            </a>
+                            <a href="/perfil/editar">
+                                <span style="margin-right: 0.5rem;">⚙️</span>
+                                Configurações
+                            </a>
+                            <a href="/meditacoes">
+                                <span style="margin-right: 0.5rem;">🧘</span>
+                                Minhas Meditações
+                            </a>
+                            <a href="/forum">
+                                <span style="margin-right: 0.5rem;">💬</span>
+                                Fórum
+                            </a>
+                            <a href="#" onclick="document.getElementById('logoutForm').submit(); return false;" style="color: #dc3545;">
+                                <span style="margin-right: 0.5rem;">🚪</span>
+                                Sair
+                            </a>
+                        </div>
+                        
+                        <!-- Formulário de logout oculto -->
+                        <form id="logoutForm" method="post" action="/logout" style="display: none;">
                         </form>
                     </li>
                 % else:
@@ -202,6 +337,35 @@
     
     <!-- JavaScript Base -->
     <script src="/static/js/main.js"></script>
+    
+    <!-- JavaScript para dropdown do usuário -->
+    <script>
+        // Fechar dropdown quando clicar fora
+        document.addEventListener('click', function(event) {
+            const dropdown = document.querySelector('.user-dropdown');
+            if (dropdown && !dropdown.contains(event.target)) {
+                const dropdownContent = dropdown.querySelector('.user-dropdown-content');
+                if (dropdownContent) {
+                    dropdownContent.style.display = 'none';
+                }
+            }
+        });
+        
+        // Toggle dropdown no mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            const userInfo = document.querySelector('.user-info');
+            if (userInfo && window.innerWidth <= 768) {
+                userInfo.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const dropdownContent = this.parentElement.querySelector('.user-dropdown-content');
+                    if (dropdownContent) {
+                        dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+                    }
+                });
+            }
+        });
+    </script>
+    
     % if defined('extra_js'):
     {{!extra_js}}
     % end

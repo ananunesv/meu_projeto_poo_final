@@ -4,61 +4,61 @@
     "title": "Meditação para Dormir",
     "duration": 20,
     "category": "sono",
-    "description": "Relaxamento profundo para uma noite tranquila",
+    "description": "Relaxamento profundo para uma noite tranquila. Técnica de respiração 4-7-8 combinada com relaxamento muscular progressivo.",
     "username": "ana_medita",
     "created_at": "2025-01-02T20:00:00"
   },
   {
     "id": "87a98724-2dcd-4987-868d-604eef7fea94",
-    "title": "asdasdasdasdasdasdasdasdasdasdasdasd",
+    "title": "Concentração Matinal",
     "duration": 10,
     "category": "concentracao",
-    "description": "asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdas",
+    "description": "Técnica de foco para começar o dia com clareza mental. Concentre-se na respiração e observe os pensamentos sem julgamento.",
     "username": "bolinhadegolf",
     "created_at": "2025-07-01T20:47:20.575227"
   },
   {
     "id": "e4a78d86-29a9-4e33-ac97-391da7e46e61",
-    "title": "LEVANTADO DE COSTAS",
+    "title": "Relaxamento das Costas",
     "duration": 10,
     "category": "relaxamento",
-    "description": "LEVANTADO DE COSTAS",
+    "description": "Meditação específica para aliviar tensões nas costas. Postura deitada, respiração profunda e visualização de relaxamento muscular.",
     "username": "bolinhadegolf",
     "created_at": "2025-07-01T20:49:37.621337"
   },
   {
     "id": "588edc8b-2589-4084-b8c3-40494bcdb516",
-    "title": "lalallalalalalal",
+    "title": "Paz Interior",
     "duration": 10,
     "category": "estresse",
-    "description": "asjdbksjfsdfsd",
+    "description": "Meditação para reduzir ansiedade e encontrar calma interior. Foque na respiração natural e permita que os pensamentos fluam.",
     "username": "admin",
     "created_at": "2025-07-01T21:05:09.615654"
   },
   {
     "id": "53882f02-859e-49c8-b8dd-0aeb84e0b453",
-    "title": "MeditaÃ§Ã£o matinal",
+    "title": "Meditação Matinal",
     "duration": 10,
     "category": "respiracao",
-    "description": "cabei de acordar caramba",
+    "description": "Prática energizante para começar o dia. Respire profundamente e sinta a energia vital circulando pelo corpo.",
     "username": "ananunesv",
     "created_at": "2025-07-02T16:59:58.304812"
   },
   {
     "id": "12e526de-4c28-412c-8c97-2e53fd11fb80",
-    "title": "MeditaÃ§Ã£o para nÃ£o surtar com 7 matÃ©rias socorro vou ter um burnout",
+    "title": "Alívio do Estresse Acadêmico",
     "duration": 10,
     "category": "respiracao",
-    "description": "nÃ£o tanko mais a unb alguÃ©m me leva para o capsi eu imploro",
+    "description": "Meditação especial para estudantes. Respire fundo, solte as tensões dos estudos e encontre equilíbrio mental para os desafios acadêmicos.",
     "username": "admin",
     "created_at": "2025-07-03T09:57:36.138794"
   },
   {
     "id": "b634f9b8-0590-477e-afa8-d8c42b3f0645",
-    "title": "concentracao",
+    "title": "Concentração Matinal",
     "duration": 10,
     "category": "respiracao",
-    "description": "manha meditacao",
+    "description": "Técnica de respiração consciente para preparar a mente para o dia. Inspire calma, expire tensão.",
     "username": "admin",
     "created_at": "2025-07-03T11:23:09.859865"
   }

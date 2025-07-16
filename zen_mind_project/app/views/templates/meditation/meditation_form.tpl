@@ -5,8 +5,13 @@
         <!-- Header do formulário -->
         <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 3rem 2rem; border-radius: 20px; text-align: center; color: white; margin-bottom: 3rem; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);">
             <div style="font-size: 4rem; margin-bottom: 1rem;">✨</div>
-            <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem; font-weight: 700;">Nova Meditação</h1>
-            <p style="font-size: 1.2rem; opacity: 0.9; margin: 0;">Crie uma sessão personalizada para seu bem-estar</p>
+            % if defined('action') and action == 'edit':
+                <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem; font-weight: 700;">Editar Meditação</h1>
+                <p style="font-size: 1.2rem; opacity: 0.9; margin: 0;">Atualize sua sessão de meditação</p>
+            % else:
+                <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem; font-weight: 700;">Nova Meditação</h1>
+                <p style="font-size: 1.2rem; opacity: 0.9; margin: 0;">Crie uma sessão personalizada para seu bem-estar</p>
+            % end
         </div>
 
         <!-- Formulário -->
@@ -17,13 +22,18 @@
                 </div>
             % end
             
-            <form method="post" style="max-width: 600px; margin: 0 auto;">
+            % if defined('action') and action == 'edit':
+                <form method="post" action="/meditacoes/{{meditation.id}}/editar" style="max-width: 600px; margin: 0 auto;">
+            % else:
+                <form method="post" action="/meditacoes/nova" style="max-width: 600px; margin: 0 auto;">
+            % end
                 <!-- Título -->
                 <div style="margin-bottom: 2rem;">
                     <label for="title" style="display: block; margin-bottom: 0.75rem; font-weight: 600; color: #333; font-size: 1.1rem;">✏️ Título da Meditação</label>
                     <input type="text" id="title" name="title" 
                            placeholder="Ex: Respiração Matinal para Concentração" 
-                           style="width: 100%; padding: 1rem; border: 2px solid #e9ecef; border-radius: 10px; font-size: 1rem; transition: all 0.3s ease; background: #f8f9fa;"
+                           value="{{meditation.title if defined('meditation') and meditation else get('form_data', {}).get('title', '') if defined('form_data') else ''}}"
+                           style="width: 100%; padding: 1rem; border: 2px solid #e9ecef; border-radius: 10px; font-size: 1rem; transition: all 0.3s ease; background: #f8f9fa; box-sizing: border-box;"
                            required maxlength="100"
                            onfocus="this.style.borderColor='#667eea'; this.style.backgroundColor='white'"
                            onblur="this.style.borderColor='#e9ecef'; this.style.backgroundColor='#f8f9fa'">
@@ -35,8 +45,9 @@
                     <div>
                         <label for="duration" style="display: block; margin-bottom: 0.75rem; font-weight: 600; color: #333; font-size: 1.1rem;">⏱️ Duração (minutos)</label>
                         <input type="number" id="duration" name="duration" 
-                               min="1" max="120" value="10"
-                               style="width: 100%; padding: 1rem; border: 2px solid #e9ecef; border-radius: 10px; font-size: 1rem; transition: all 0.3s ease; background: #f8f9fa;"
+                               min="1" max="120" 
+                               value="{{meditation.duration if defined('meditation') and meditation else get('form_data', {}).get('duration', '10') if defined('form_data') else '10'}}"
+                               style="width: 100%; padding: 1rem; border: 2px solid #e9ecef; border-radius: 10px; font-size: 1rem; transition: all 0.3s ease; background: #f8f9fa; box-sizing: border-box;"
                                required
                                onfocus="this.style.borderColor='#667eea'; this.style.backgroundColor='white'"
                                onblur="this.style.borderColor='#e9ecef'; this.style.backgroundColor='#f8f9fa'">
@@ -46,17 +57,27 @@
                     <div>
                         <label for="category" style="display: block; margin-bottom: 0.75rem; font-weight: 600; color: #333; font-size: 1.1rem;">🏷️ Categoria</label>
                         <select id="category" name="category" 
-                                style="width: 100%; padding: 1rem; border: 2px solid #e9ecef; border-radius: 10px; font-size: 1rem; transition: all 0.3s ease; background: #f8f9fa;" 
+                                style="width: 100%; padding: 1rem; border: 2px solid #e9ecef; border-radius: 10px; font-size: 1rem; transition: all 0.3s ease; background: #f8f9fa; box-sizing: border-box;" 
                                 required
                                 onfocus="this.style.borderColor='#667eea'; this.style.backgroundColor='white'"
                                 onblur="this.style.borderColor='#e9ecef'; this.style.backgroundColor='#f8f9fa'">
                             <option value="">Selecione uma categoria</option>
-                            <option value="respiracao">🌬️ Respiração</option>
-                            <option value="mindfulness">🧠 Mindfulness</option>
-                            <option value="relaxamento">😌 Relaxamento</option>
-                            <option value="concentracao">🎯 Concentração</option>
-                            <option value="sono">😴 Sono</option>
-                            <option value="estresse">🧘 Redução de Estresse</option>
+                            % categories_data = [
+                            %   ("respiracao", "🌬️ Respiração"),
+                            %   ("mindfulness", "🧠 Mindfulness"), 
+                            %   ("relaxamento", "😌 Relaxamento"),
+                            %   ("concentracao", "🎯 Concentração"),
+                            %   ("sono", "😴 Sono"),
+                            %   ("estresse", "🧘 Redução de Estresse")
+                            % ]
+                            % current_category = meditation.category if defined('meditation') and meditation else get('form_data', {}).get('category', '') if defined('form_data') else ''
+                            % for cat_value, cat_label in categories_data:
+                                % if cat_value == current_category:
+                                    <option value="{{cat_value}}" selected>{{cat_label}}</option>
+                                % else:
+                                    <option value="{{cat_value}}">{{cat_label}}</option>
+                                % end
+                            % end
                         </select>
                     </div>
                 </div>
@@ -74,17 +95,25 @@
 • Objetivos da prática
 
 Exemplo: 'Sente-se confortavelmente com as costas eretas. Respire naturalmente e conte cada expiração de 1 a 10. Quando chegar ao 10, recomece do 1. Se perder a conta, simplesmente recomece do 1...'" 
-                              style="width: 100%; padding: 1rem; border: 2px solid #e9ecef; border-radius: 10px; font-size: 1rem; min-height: 150px; resize: vertical; transition: all 0.3s ease; background: #f8f9fa; line-height: 1.6;"
+                              style="width: 100%; padding: 1rem; border: 2px solid #e9ecef; border-radius: 10px; font-size: 1rem; min-height: 150px; resize: vertical; transition: all 0.3s ease; background: #f8f9fa; line-height: 1.6; box-sizing: border-box;"
                               required maxlength="500" rows="8"
                               onfocus="this.style.borderColor='#667eea'; this.style.backgroundColor='white'"
-                              onblur="this.style.borderColor='#e9ecef'; this.style.backgroundColor='#f8f9fa'"></textarea>
-                    <small style="color: #6c757d; margin-top: 0.5rem; display: block;">Máximo 500 caracteres. Seja detalhado e claro nas instruções.</small>
+                              onblur="this.style.borderColor='#e9ecef'; this.style.backgroundColor='#f8f9fa'"
+                              oninput="updateCharCount(this)">{{meditation.description if defined('meditation') and meditation else get('form_data', {}).get('description', '') if defined('form_data') else ''}}</textarea>
+                    <div style="display: flex; justify-content: space-between; margin-top: 0.5rem;">
+                        <small style="color: #6c757d;">Máximo 500 caracteres. Seja detalhado e claro nas instruções.</small>
+                        <small id="charCount" style="color: #6c757d;">0/500</small>
+                    </div>
                 </div>
                 
                 <!-- Botões -->
                 <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 3rem;">
                     <button type="submit" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 1.25rem 3rem; border: none; border-radius: 25px; font-weight: 600; font-size: 1.1rem; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 25px rgba(102, 126, 234, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(102, 126, 234, 0.3)'">
-                        ✨ Criar Meditação
+                        % if defined('action') and action == 'edit':
+                            💾 Atualizar Meditação
+                        % else:
+                            ✨ Criar Meditação
+                        % end
                     </button>
                     <a href="/dashboard" style="background: #6c757d; color: white; padding: 1.25rem 3rem; border-radius: 25px; text-decoration: none; font-weight: 600; font-size: 1.1rem; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#5a6268'" onmouseout="this.style.backgroundColor='#6c757d'">
                         ↩️ Cancelar
@@ -124,6 +153,31 @@ Exemplo: 'Sente-se confortavelmente com as costas eretas. Respire naturalmente e
         </div>
     </div>
 </main>
+
+<script>
+// Contador de caracteres para descrição
+function updateCharCount(textarea) {
+    const count = textarea.value.length;
+    const counter = document.getElementById('charCount');
+    counter.textContent = count + '/500';
+    
+    if (count > 450) {
+        counter.style.color = '#e74c3c';
+    } else if (count > 400) {
+        counter.style.color = '#ffc107';
+    } else {
+        counter.style.color = '#6c757d';
+    }
+}
+
+// Inicializar contador quando a página carregar
+document.addEventListener('DOMContentLoaded', function() {
+    const textarea = document.getElementById('description');
+    if (textarea) {
+        updateCharCount(textarea);
+    }
+});
+</script>
 
 <style>
 @media (max-width: 768px) {
