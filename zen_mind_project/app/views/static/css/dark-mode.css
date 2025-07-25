@@ -1,0 +1,425 @@
+/* Arquivo: zen_mind_project/app/views/static/css/dark-mode.css */
+
+/* ===== VARIÁVEIS CSS PARA MODO ESCURO ===== */
+:root {
+    /* Cores Modo Claro (padrão) */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-tertiary: #e9ecef;
+    --bg-card: #ffffff;
+    --bg-input: #f8f9fa;
+    
+    --text-primary: #1a1a2e;
+    --text-secondary: #6c757d;
+    --text-muted: #adb5bd;
+    --text-inverse: #ffffff;
+    
+    --border-primary: #e9ecef;
+    --border-secondary: #dee2e6;
+    --border-focus: #667eea;
+    
+    --shadow-light: 0 5px 25px rgba(0,0,0,0.1);
+    --shadow-medium: 0 10px 35px rgba(0,0,0,0.15);
+    --shadow-strong: 0 10px 30px rgba(102, 126, 234, 0.3);
+    
+    /* Cores que permanecem iguais */
+    --primary: #667eea;
+    --secondary: #764ba2;
+    --success: #48bb78;
+    --warning: #ffc107;
+    --danger: #dc3545;
+    --info: #17a2b8;
+}
+
+/* ===== MODO ESCURO - DETECÇÃO AUTOMÁTICA ===== */
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Cores Modo Escuro */
+        --bg-primary: #1a1a2e;
+        --bg-secondary: #16213e;
+        --bg-tertiary: #0f1419;
+        --bg-card: #16213e;
+        --bg-input: #242b3d;
+        
+        --text-primary: #e9ecef;
+        --text-secondary: #adb5bd;
+        --text-muted: #6c757d;
+        --text-inverse: #1a1a2e;
+        
+        --border-primary: rgba(255, 255, 255, 0.1);
+        --border-secondary: rgba(255, 255, 255, 0.15);
+        --border-focus: #667eea;
+        
+        --shadow-light: 0 5px 25px rgba(0,0,0,0.3);
+        --shadow-medium: 0 10px 35px rgba(0,0,0,0.4);
+        --shadow-strong: 0 10px 30px rgba(102, 126, 234, 0.2);
+    }
+}
+
+/* ===== ESTILOS BASE GLOBAIS ===== */
+* {
+    box-sizing: border-box;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+body {
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ===== OVERRIDE PARA ESTILOS INLINE ===== */
+
+/* Backgrounds brancos */
+[style*="background: white"],
+[style*="background:#ffffff"],
+[style*="background-color: white"],
+[style*="background-color:#ffffff"],
+[style*="background: #ffffff"] {
+    background: var(--bg-card) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-primary) !important;
+}
+
+/* Backgrounds com gradientes - manter texto branco */
+[style*="background: linear-gradient(135deg, #667eea"],
+[style*="background: linear-gradient(135deg, #48bb78"],
+[style*="background: linear-gradient(135deg, #f093fb"],
+[style*="background: linear-gradient(135deg, #ed8936"],
+[style*="background: linear-gradient(180deg, #ffffff"] {
+    color: var(--text-inverse) !important;
+}
+
+/* Backgrounds específicos */
+[style*="background: #f8f9fa"] {
+    background: var(--bg-input) !important;
+    color: var(--text-primary) !important;
+}
+
+[style*="background: #e9ecef"] {
+    background: var(--bg-tertiary) !important;
+    color: var(--text-primary) !important;
+}
+
+[style*="background: #1a1a2e"] {
+    background: var(--text-primary) !important;
+    color: var(--text-inverse) !important;
+}
+
+/* Texto com cores específicas */
+[style*="color: #333"] {
+    color: var(--text-primary) !important;
+}
+
+[style*="color: #666"] {
+    color: var(--text-secondary) !important;
+}
+
+[style*="color: #999"],
+[style*="color: #adb5bd"] {
+    color: var(--text-muted) !important;
+}
+
+[style*="color: white"] {
+    color: var(--text-inverse) !important;
+}
+
+/* ===== ELEMENTOS ESPECÍFICOS ===== */
+
+/* Headers e títulos dentro de elementos com gradiente */
+[style*="background: linear-gradient"] h1,
+[style*="background: linear-gradient"] h2,
+[style*="background: linear-gradient"] h3,
+[style*="background: linear-gradient"] h4,
+[style*="background: linear-gradient"] h5,
+[style*="background: linear-gradient"] h6,
+[style*="background: linear-gradient"] p,
+[style*="background: linear-gradient"] span,
+[style*="background: linear-gradient"] div {
+    color: var(--text-inverse) !important;
+}
+
+/* Cards com backgrounds transparentes */
+[style*="background: rgba(255, 255, 255, 0.1)"] {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: var(--text-inverse) !important;
+}
+
+/* ===== NAVEGAÇÃO ===== */
+.main-nav {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px) !important;
+    border-bottom: 1px solid var(--border-primary) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    .main-nav {
+        background: rgba(26, 26, 46, 0.95) !important;
+    }
+}
+
+.nav-links a {
+    color: var(--text-primary) !important;
+}
+
+.nav-links a:hover {
+    color: var(--primary) !important;
+}
+
+.logo {
+    color: var(--primary) !important;
+}
+
+.nav-cta {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%) !important;
+    color: var(--text-inverse) !important;
+}
+
+/* ===== FORMULÁRIOS ===== */
+input, textarea, select {
+    background: var(--bg-input) !important;
+    color: var(--text-primary) !important;
+    border: 2px solid var(--border-primary) !important;
+}
+
+input:focus, textarea:focus, select:focus {
+    background: var(--bg-card) !important;
+    border-color: var(--border-focus) !important;
+    color: var(--text-primary) !important;
+}
+
+input::placeholder, textarea::placeholder {
+    color: var(--text-muted) !important;
+}
+
+label {
+    color: var(--text-primary) !important;
+}
+
+/* ===== BOTÕES ===== */
+[style*="background: #28a745"] {
+    background: var(--success) !important;
+    color: var(--text-inverse) !important;
+}
+
+[style*="background: #ffc107"] {
+    background: var(--warning) !important;
+    color: var(--text-primary) !important;
+}
+
+[style*="background: #dc3545"] {
+    background: var(--danger) !important;
+    color: var(--text-inverse) !important;
+}
+
+[style*="background: #6c757d"] {
+    background: var(--text-secondary) !important;
+    color: var(--text-inverse) !important;
+}
+
+/* ===== MENSAGENS DE ERRO E SUCESSO ===== */
+.error-message,
+[style*="background: rgba(255, 107, 107, 0.1)"],
+[style*="background: #f8d7da"] {
+    background: rgba(220, 53, 69, 0.1) !important;
+    color: var(--danger) !important;
+    border: 1px solid rgba(220, 53, 69, 0.3) !important;
+}
+
+.success-message,
+[style*="background: rgba(72, 187, 120, 0.1)"],
+[style*="background: #d4edda"] {
+    background: rgba(72, 187, 120, 0.1) !important;
+    color: var(--success) !important;
+    border: 1px solid rgba(72, 187, 120, 0.3) !important;
+}
+
+/* ===== DROPDOWN DE USUÁRIO ===== */
+.user-dropdown-content {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-primary) !important;
+    box-shadow: var(--shadow-medium) !important;
+}
+
+.user-dropdown-content a {
+    color: var(--text-primary) !important;
+    border-bottom: 1px solid var(--border-primary) !important;
+}
+
+.user-dropdown-content a:hover {
+    background: var(--bg-input) !important;
+    color: var(--primary) !important;
+}
+
+.user-info {
+    background: rgba(102, 126, 234, 0.1) !important;
+}
+
+.user-info:hover {
+    background: rgba(102, 126, 234, 0.15) !important;
+}
+
+.user-name {
+    color: var(--text-primary) !important;
+}
+
+.user-status {
+    color: var(--text-secondary) !important;
+}
+
+/* ===== CARDS E SEÇÕES ===== */
+.card, .meditation-card, .post-item, .benefit-card {
+    background: var(--bg-card) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-primary) !important;
+}
+
+.meditation-title {
+    color: var(--text-primary) !important;
+}
+
+.meditation-description {
+    color: var(--text-secondary) !important;
+}
+
+.category-badge {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%) !important;
+    color: var(--text-inverse) !important;
+}
+
+/* ===== FÓRUM ===== */
+.post-item:hover {
+    background: var(--bg-input) !important;
+}
+
+.post-content {
+    color: var(--text-primary) !important;
+}
+
+.post-author h4 {
+    color: var(--text-primary) !important;
+}
+
+.post-date {
+    color: var(--text-secondary) !important;
+}
+
+/* ===== FOOTER ===== */
+.main-footer {
+    background: var(--text-primary) !important;
+    color: var(--text-inverse) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    .main-footer {
+        background: var(--bg-tertiary) !important;
+        color: var(--text-primary) !important;
+        border-top: 1px solid var(--border-primary) !important;
+    }
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.footer-links a:hover {
+    color: var(--text-inverse) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    .footer-links a {
+        color: var(--text-secondary) !important;
+    }
+    
+    .footer-links a:hover {
+        color: var(--text-primary) !important;
+    }
+}
+
+/* ===== BACKGROUNDS ESPECÍFICOS DO SISTEMA ===== */
+.main-content {
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%) !important;
+}
+
+/* Login/Register containers */
+.login-container, .register-container {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%) !important;
+}
+
+.login-card, .register-card {
+    background: var(--bg-card) !important;
+    color: var(--text-primary) !important;
+}
+
+/* ===== ELEMENTOS GERAIS ===== */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary) !important;
+}
+
+p {
+    color: var(--text-primary) !important;
+}
+
+small {
+    color: var(--text-muted) !important;
+}
+
+/* ===== SCROLLBAR PERSONALIZADA ===== */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-secondary);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+}
+
+/* ===== ACESSIBILIDADE ===== */
+:focus {
+    outline: 2px solid var(--primary) !important;
+    outline-offset: 2px !important;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1rem;
+    }
+    
+    .main-content {
+        padding: 1rem 0;
+    }
+}
+
+/* ===== ANIMAÇÕES RESPEITOSAS ===== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+    body {
+        background: white !important;
+        color: black !important;
+    }
+    
+    .main-nav,
+    .main-footer {
+        display: none !important;
+    }
+}

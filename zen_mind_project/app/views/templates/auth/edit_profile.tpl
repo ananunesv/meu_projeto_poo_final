@@ -7,6 +7,9 @@
             <div style="font-size: 4rem; margin-bottom: 1rem;">✏️</div>
             <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem; font-weight: 700;">Editar Perfil</h1>
             <p style="font-size: 1.2rem; opacity: 0.9; margin: 0;">Atualize suas informações pessoais</p>
+            <meta name="color-scheme" content="light dark">
+            <meta name="theme-color" content="#667eea" media="(prefers-color-scheme: light)">
+            <meta name="theme-color" content="#1a1a2e" media="(prefers-color-scheme: dark)">
         </div>
 
         <!-- Mensagens de Erro -->
